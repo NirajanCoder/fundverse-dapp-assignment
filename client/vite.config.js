@@ -4,10 +4,21 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 import dotenv from "dotenv";
 dotenv.config();
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
+
   define: {
     "process.env": process.env,
+  },
+
+  // 🔥 ADD THIS (important)
+  build: {
+    target: "esnext",
+  },
+
+  optimizeDeps: {
+    esbuildOptions: {
+      target: "esnext",
+    },
   },
 });
